@@ -18,7 +18,7 @@ public class Calandar {
 		System.out.printf("%d월은 %d 일 까지 있습니다.\n", month, maxDays[month - 1]);
 		scanner.close();
 		
-		
+		 
 		   
 		
 		//
