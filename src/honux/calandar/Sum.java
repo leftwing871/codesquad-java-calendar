@@ -5,6 +5,8 @@ import java.util.Scanner;
 public class Sum {
 	public static void main(String[] args) {
 		int a, b;
+		//ctrl + shift + m
+		//cmd + shift + o
 		Scanner scanner = new Scanner(System.in);
 		
 		String s1, s2;
