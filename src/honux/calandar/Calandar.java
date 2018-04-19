@@ -6,32 +6,94 @@ import java.util.Scanner;
 public class Calandar {
 	
 	private final static int[] MAX_DAYS = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-	public int getMaxDaysOfMonth(int month) {
-		return MAX_DAYS[month -1];
+	private final static int[] LEAP_MAX_DAYS = {31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+	
+	public boolean isLeapYear(int year) {
+		if ( year % 4 == 0 && (year % 100 != 0 || year % 400 != 0))
+			return true;
+		else
+			return false;
 	}
 	
-	public static void main(String[] args) {
-//		System.out.println("hello, calndar");
-		
-		//숫자를 입력받아 해당하는 달의 최대 일수을 출력하는 프로그램
-		Scanner scanner = new Scanner(System.in);
-		Calandar cal = new Calandar();
-		
-		System.out.println("반복횟수를 입력하세요");
-		int repeat = scanner.nextInt();
-		
-		for(int i = 0; i < repeat; i++)
+	public int getMaxDaysOfMonth(int year, int month) {
+		if(isLeapYear(year))
 		{
-			System.out.println("달을 입력하세요");
-			int month = scanner.nextInt();
-			
-			System.out.printf("%d월은 %d 일 까지 있습니다.\n", month, cal.getMaxDaysOfMonth(month));
-			
+			return LEAP_MAX_DAYS[month -1];
 		}
-		System.out.println("bye~");
+		else 
+		{
+			return MAX_DAYS[month -1];	
+		}
 		
-		//
-		scanner.close();
 	}
+	
+	/*
+	 * 
+	 * 월을 입력하면 해당월의 달력을 출력한다.
+	 * 달력의 모양은 1단계에서 작성한 모양으로 만든다.
+	 * 1일은 일요일로 정해도 무방하다.
+	 * -1을 입력받기 전까지 반복 입력받는다.
+	 * 프롬프트를 출력한다.
+	 * 
+	 */
+	
+	public void printCalendar(int year, int month, int weekday) {
+		System.out.printf("  <<%4d년 %3d월>>\n", year, month);
+		System.out.println("SU MO TU WE TH FR SA");
+		System.out.println("====================");
+		
+		//자동완성 : ctrl + space
+		
+		//print blank space
+		for(int i=0; i < weekday; i++)
+		{
+			System.out.print("   ");
+		}
+		
+		int maxDay = getMaxDaysOfMonth(year, month);
+		int count = 7 - weekday;
+		int delim = (count < 7) ? count : 0;
+		
+		//print first line
+		for(int i = 1; i <= count; i++) {
+			System.out.printf("%3d", i);
+		}
+		System.out.println();
+		
+		count++;
+		//print from second line to last
+		for(int i = count; i <= maxDay; i++) {
+			System.out.printf("%3d", i);
+			if(i % 7 == delim)
+				System.out.println();
+		}
+		System.out.println();
+		
+	}
+	
+	
+	
+	
+
 }
  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
